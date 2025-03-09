@@ -5,7 +5,7 @@ services:
     image: node:23 # Используется Node.js v23
     container_name: nuxt_app
     ports:
-      - "3000:3000" # Пробрасываем порт для Nuxt
+      - "9800:3000" # Пробрасываем порт для Nuxt
     volumes:
       - .:/usr/src/app # Монтируем текущую директорию
       - /usr/src/app/node_modules # Исключаем node_modules из монтирования
