@@ -3,7 +3,7 @@ version: '3.9'
 services:
   app:
     image: node:23 # Используется Node.js v23
-    container_name: nuxt_app
+    container_name: dgpart_www_app
     ports:
       - "9800:3000" # Пробрасываем порт для Nuxt
     volumes:
