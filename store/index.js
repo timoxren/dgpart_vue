@@ -1,40 +1,17 @@
-import isString from 'lodash.isstring'
-export const state = () => ({
-  pageType: '',
-  title: '',
-  subtitle: '',
-  featureImage: '',
-  content: '',
-  author: '',
-  date: ''
-})
-export const mutations = {
-  set(state, data) {
-    state = Object.assign(state, data)
-  }
-}
-export const actions = {
-  nuxtServerInit(store, context) {
-    this.$cms = context.store.$cms
-  },
-  set({ commit }, { resource, slug }) {
-    if (!resource) {
-      setOtherPageData(commit, this.$siteConfig)
-    } else {
-      const theResource = isString(resource) ? this.$cms[resource] : resource
-      const data = Object.assign(theResource.getOne(slug), {
-        pageType: theResource.slug
-      })
-      data.slug = slug
-      commit('set', data)
-    }
-  }
-}
+import { defineStore } from 'pinia';
 
-function setOtherPageData(commit, siteConfig) {
-  commit('set', {
-    title: siteConfig.siteName,
-    subtitle: siteConfig.tagline,
-    featureImage: siteConfig.featureImage
-  })
-}
+export const useMainStore = defineStore('main', {
+    state: () => ({
+        blogPosts: [],
+    }),
+    actions: {
+        async fetchBlogPosts() {
+            const posts = [
+                { id: 1, title: 'Post 1', description: 'Description 1', date: 'May 11' },
+                { id: 2, title: 'Post 2', description: 'Description 2', date: 'May 12' },
+                { id: 3, title: 'Post 3', description: 'Description 3', date: 'July 20' },
+            ];
+            this.blogPosts = posts;
+        },
+    },
+});

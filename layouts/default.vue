@@ -1,109 +1,47 @@
 <template>
-  <div
-    :class="
-      `site-layout-width-${$siteConfig.layout.width} posts-theme-${$siteConfig.posts.theme}`
-    "
-  >
-    <site-nav />
-    <nuxt />
-    <news-letter-slide-out v-if="$siteConfig.newsletter.on" />
-    <site-footer></site-footer>
+
+
+  <!-- Page Top	 -->
+  <div id="page-top"></div>
+  <!-- Page Top End -->
+  <menu-section></menu-section>
+  <slot/>
+  <Footer></Footer>
+  <div id="scroll-to-top">
+		<span>
+			<i class="fa fa-chevron-up"></i>
+		</span>
   </div>
+
+
 </template>
 
 <script>
-import 'animate.css/animate.min.css'
-export default {
-  transition: 'slide-fade',
-  head() {
-    return {
-      title: `${this.$store.state.title} | ${this.$siteConfig.siteName}`,
-      meta: [
-        {
-          hid: 'description',
-          name: 'description',
-          content: this.$store.state.subtitle
-        },
-        {
-          hid: 'og:description',
-          property: 'og:description',
-          content: this.$store.state.subtitle
-        },
-        {
-          hid: 'og:title',
-          property: 'og:title',
-          content: this.$store.state.title
-        },
-        {
-          hid: 'og:image',
-          property: 'og:image',
-          content: this.$store.state.featureImage
-            ? (process.env.URL ? process.env.URL : '') +
-              require(`~/assets${this.$store.state.featureImage}`)
-            : ''
-        },
-        {
-          hid: 'og:url',
-          property: 'og:url',
-          content: this.url
-        },
-        {
-          hid: 'twitter:card',
-          name: 'twitter:card',
-          content: `summary_large_image`
-        },
-        {
-          hid: 'og:site_name',
-          name: 'og:site_name',
-          content: this.$siteConfig.siteName
-        }
-      ]
-    }
-  },
-  data() {
-    return {
-      items: [
-        {
-          title: 'Home',
-          icon: 'home',
-          to: { name: 'index' }
-        },
-        {
-          title: 'Inspire',
-          icon: 'lightbulb',
-          to: { name: 'inspire' }
-        }
-      ]
-    }
-  },
-  watch: {
-    $route(to, from) {
-      this.$eventBus.$emit('route-changed', this.$route)
-    }
-  },
-  mounted() {
-    this.$cms.lifeCycleHooks.mounted()
-  },
-  beforeCreate() {
-    this.$cms.lifeCycleHooks.beforeCreate()
-  },
-  created() {
-    this.$cms.lifeCycleHooks.created()
-  },
-  beforeMount() {
-    this.$cms.lifeCycleHooks.beforeMount()
-  },
-  beforeUpdate() {
-    this.$cms.lifeCycleHooks.beforeUpdate()
-  },
-  updated() {
-    this.$cms.lifeCycleHooks.updated()
-  },
-  beforeDestroy() {
-    this.$cms.lifeCycleHooks.beforeDestroy()
-  },
-  destroy() {
-    this.$cms.lifeCycleHooks.destroy()
-  }
-}
+import "assets/css/bootstrap.min.css"
+
+// import "assets/css/font-awesome.min.css"
+
+import "assets/css/font-icons.css"
+import "assets/css/linecons-font-style.css"
+import "assets/css/jquery.fs.boxer.css"
+// import "assets/css/owl.carousel.css"
+import "assets/css/content_slider_style.css"
+import "assets/css/animate.css"
+// import "assets/css/style.css"
+import "assets/scss/style.scss"
+// import "assets/css/responsive.css"
+import "assets/scss/responsive.scss"
+import {defineComponent} from "vue";
+import Breadcrumbs from "~/components/breadcrumbs.vue";
+import Footer from "~/components/footer.vue";
+
+export default defineComponent({
+  components: {Breadcrumbs, Footer}
+})
+
+
 </script>
+
+<style>
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css');
+</style>

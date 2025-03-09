@@ -1,37 +1,75 @@
-Awake is a Nuxt.js template for generating a beautifully robust static site with blog. 
+# Nuxt Minimal Starter
 
-# Features
+Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
-* Simple modern design based on the Bulma css framework (with unused css purged via [purgecss](https://www.purgecss.com/))
-* Site search
-* Statically generated API for posts and categories
-* Disqus powered comments
-* Mailchimp powered newsletter
-* Highly customizable with out of the box configurations
-* Built with performance in mind
-* Isolated Netlify CMS driver (with more CMS drivers planned for future) for easily migrating between various headless cms'
-* Images automatically resized for various screens and given srcsets
+## Setup
 
-# Use Awake on Netlify
-Simply click the "Deploy to Netlify" button and then configure it to fit your needs as described below.
+Make sure to install dependencies:
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/danielkellyio/awake-template)
+```bash
+# npm
+npm install
 
-# Configuration
+# pnpm
+pnpm install
 
-Site configuration is found in `/config/_siteConfig.js`. Here you can customize site settings such as the site name, layout, disqus and mailchimp setup, image sizes and more. Any of these can be setup to use environment variables if you so desire, in order to be able to configure them directly from the Netlify interface. See the setup for google analytics which already uses an environment variable as an example of this.
+# yarn
+yarn install
 
-```
-googleAnalytics: {
-    on: true,
-    id: process.env.GOOGLE_ANALYTICS_ID
-},
+# bun
+bun install
 ```
 
-# Editing Content
+## Development Server
 
-Posts and categories can be edited in Netlify CMS at \[your-site-url]/admin. At this time any new pages must be created in the code itself and committed to the repo. Before you visit the admin for the first time, make sure you have [Netlify Identity](https://www.netlify.com/docs/identity/) setup with your user and make sure "Git Gateway" is enabled via the Identity Settings page in the Netlify admin. 
+Start the development server on `http://localhost:3000`:
 
-# Local Development
+```bash
+# npm
+npm run dev
 
-Since all content is store in the git repo with Netlify CMS, local development is a breeze. Simply install node, pull down the repo, install the dependencies with `npm install`, and run `npm run dev`.
+# pnpm
+pnpm dev
+
+# yarn
+yarn dev
+
+# bun
+bun run dev
+```
+
+## Production
+
+Build the application for production:
+
+```bash
+# npm
+npm run build
+
+# pnpm
+pnpm build
+
+# yarn
+yarn build
+
+# bun
+bun run build
+```
+
+Locally preview production build:
+
+```bash
+# npm
+npm run preview
+
+# pnpm
+pnpm preview
+
+# yarn
+yarn preview
+
+# bun
+bun run preview
+```
+
+Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
