@@ -1,49 +1,53 @@
 <template>
-  <!-- Portfolio Page -->
-  <div id="portfolio-page" class="page portfolio-page">
-    <div class="works-section">
-      <div id="works-container" class="clearfix">
-        <div class="container">
-          <div class="portfolioFilter">
-            <a href="#" data-filter="" class="current">Смотреть все</a>
-            <a href="#" data-filter=".cat-1">Веб-дизайн</a>
-            <a href="#" data-filter=".cat-2">Разработка </a>
-            <a href="#" data-filter=".cat-3">Оптимизация</a>
-            <a href="#" data-filter=".cat-4">Внедрение</a>
-            <a href="#" data-filter=".cat-5">Продвижение</a>
-          </div> <!-- /.worksFilter -->
-          <div id="works-item" class="works-item row`">
 
-            <figure v-for="item in blogItems" key="item.id" class="item  col-lg-3 col-md-4 col-sm-6 col-xs-12">
-              <img :src="item.image" alt="Item {{ item.id }}"/>
-              <figcaption>
-                <NuxtLink to="/portfolio-details">
-                  <div class="portfolio-caption">
-                    <span class="protfolio-title">{{ item.title }}</span>
-                    <span class="protfolio-cat">{{ item.description }}</span>
-                  </div>
-                  <span class="protfolio-icon">
+    <breadcrumbs name="Портфолио"></breadcrumbs>
+
+    <!-- Portfolio Page -->
+    <div id="portfolio-page" class="page portfolio-page">
+        <div class="works-section">
+            <div id="works-container" class="clearfix">
+                <div class="container">
+                    <div class="portfolioFilter">
+                        <a href="#" data-filter="" class="current">Смотреть все</a>
+                        <a href="#" data-filter=".cat-1">Веб-дизайн</a>
+                        <a href="#" data-filter=".cat-2">Разработка </a>
+                        <a href="#" data-filter=".cat-3">Оптимизация</a>
+                        <a href="#" data-filter=".cat-4">Внедрение</a>
+                        <a href="#" data-filter=".cat-5">Продвижение</a>
+                    </div> <!-- /.worksFilter -->
+                    <div id="works-item" class="works-item row`">
+
+                        <figure v-for="item in blogItems" key="item.id"
+                                class="item  col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                            <img :src="item.image" alt="Item {{ item.id }}"/>
+                            <figcaption>
+                                <NuxtLink to="/portfolio-details">
+                                    <div class="portfolio-caption">
+                                        <span class="protfolio-title">{{ item.title }}</span>
+                                        <span class="protfolio-cat">{{ item.description }}</span>
+                                    </div>
+                                    <span class="protfolio-icon">
                     01 <i class="fa fa-heart-o"></i>
                   </span>
-                </NuxtLink>
-              </figcaption>
-            </figure>
+                                </NuxtLink>
+                            </figcaption>
+                        </figure>
 
 
-          </div><!-- /.works-item -->
-        </div><!-- /.container -->
-      </div><!-- /#works-container -->
+                    </div><!-- /.works-item -->
+                </div><!-- /.container -->
+            </div><!-- /#works-container -->
 
-      <div class="container">
-        <div class="more-works">
-          <a class="btn" href="portfolio.html">
-            <span><i class="fa fa-plus"></i></span>
-          </a>
-        </div><!-- /.load-more -->
-      </div><!-- /.container -->
-    </div><!-- /.works-section -->
-  </div><!-- #portfolio-page -->
-  <!-- Portfolio Page -->
+            <div class="container">
+                <div class="more-works">
+                    <a class="btn" href="portfolio.html">
+                        <span><i class="fa fa-plus"></i></span>
+                    </a>
+                </div><!-- /.load-more -->
+            </div><!-- /.container -->
+        </div><!-- /.works-section -->
+    </div><!-- #portfolio-page -->
+    <!-- Portfolio Page -->
 </template>
 <script setup lang="ts">
 
@@ -112,7 +116,7 @@ const blogItems: BlogItem[] = [
 ]
 
 definePageMeta({
-  layout: 'pages' // Указываем кастомный макет
+    layout: 'pages' // Указываем кастомный макет
 });
 
 </script>
