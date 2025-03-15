@@ -3,6 +3,7 @@ stages:
 
 deploy:
   stage: deploy
+  image: debian:bullseye
   script:
     # Устанавливаем SSH ключ для подключения к серверу
     - mkdir -p ~/.ssh
