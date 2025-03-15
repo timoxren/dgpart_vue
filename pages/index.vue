@@ -1,4 +1,5 @@
 <template>
+    <breadcrumbs></breadcrumbs>
     <!--  <top-section></top-section>-->
     <about-us-section></about-us-section>
     <!--  <video-section></video-section>-->
