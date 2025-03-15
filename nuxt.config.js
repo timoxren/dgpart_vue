@@ -5,4 +5,9 @@ export default defineNuxtConfig({
   modules: [
     '@pinia/nuxt',
   ],
+  vite: {
+    server: {
+      allowedHosts: ['www.dgpart.ru'],
+    },
+  },
 });

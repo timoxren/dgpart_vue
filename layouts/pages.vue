@@ -3,7 +3,6 @@
     <div id="page-top"></div>
     <!-- Page Top End -->
     <menu-section></menu-section>
-    <breadcrumbs></breadcrumbs>
     <slot/>
     <Footer></Footer>
     <div id="scroll-to-top">
