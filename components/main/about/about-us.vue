@@ -5,7 +5,7 @@
       <div class="sec-head-container">
         <div class="sec-head-style">
           <h2 class="section-title wow bounceInDown">
-            <span>Обо</span>мне
+            <span>Обо</span>мне1
           </h2><!-- /.section-title -->
 
           <div class="section-description">
