@@ -12,5 +12,6 @@ deploy:
     - ssh-keyscan -H $DEPLOY_HOST >> ~/.ssh/known_hosts
     # Копируем файлы на сервер через rsync
     - rsync -avz --delete ./ $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
+    - ssh $DEPLOY_USER@$DEPLOY_HOST "cd $DEPLOY_PATH && docker-compose down && docker-compose up -d"
   only:
     - master # Выполняем только при пуше в основную ветку
