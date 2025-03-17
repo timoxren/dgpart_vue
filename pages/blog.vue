@@ -46,7 +46,7 @@
 										</span>
                                         <span class="tag-links">
 											<i class="fa fa-tag"></i>
-											<a v-for="tag in item.TagLinks, index" key="index" href="#" rel="tag">{{tag}}</a>
+											<a v-for="(tag, index) in item.TagLinks" key="index" href="#" rel="tag">{{tag}}</a>
 										</span>
                                     </div><!-- /.entry-meta -->
                                 </footer><!-- /.post-meta -->
