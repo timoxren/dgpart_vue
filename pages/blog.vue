@@ -9,7 +9,7 @@
 
                   <!--Start of v-for for Post Items -->
 
-                  <div v-for="item in blogItems" key="item.id" class="post-container">
+                  <div v-for="item in blogItems" :key="item.id" class="post-container">
                         <article class="post">
                             <div class="post-thumbnail">
                                 <a href="#"><img src={{item.Thumbnail}}></a>
