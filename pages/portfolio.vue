@@ -49,6 +49,7 @@
     </div><!-- #portfolio-page -->
     <!-- Portfolio Page -->
 </template>
+
 <script setup lang="ts">
 
 interface BlogItem {
@@ -61,55 +62,55 @@ interface BlogItem {
 const blogItems: BlogItem[] = [
     {
         id: 1,
-        title: "Перераспределение бюджета",
+        title: "Перераспределение бюджета1",
         description: 'Сайт',
         image: '/images/portfolio/pr-image-1.jpg'
     },
     {
         id: 2,
-        title: "Перераспределение бюджета",
+        title: "Перераспределение бюджета2",
         description: 'Сайт',
         image: '/images/portfolio/pr-image-2.jpg'
     },
     {
         id: 3,
-        title: "Перераспределение бюджета",
+        title: "Перераспределение бюджета3",
         description: 'Сайт',
         image: '/images/portfolio/pr-image-3.jpg'
     },
     {
         id: 4,
-        title: "Перераспределение бюджета",
+        title: "Перераспределение бюджета4",
         description: 'Сайт',
         image: '/images/portfolio/pr-image-4.jpg'
     },
     {
         id: 5,
-        title: "Перераспределение бюджета",
+        title: "Перераспределение бюджета5",
         description: 'Сайт',
         image: '/images/portfolio/pr-image-5.jpg'
     },
     {
         id: 6,
-        title: "Перераспределение бюджета",
+        title: "Перераспределение бюджета6",
         description: 'Сайт',
         image: '/images/portfolio/pr-image-6.jpg'
     },
     {
         id: 7,
-        title: "Перераспределение бюджета",
+        title: "Перераспределение бюджета7",
         description: 'Сайт',
         image: '/images/portfolio/pr-image-7.jpg'
     },
     {
         id: 8,
-        title: "Перераспределение бюджета",
+        title: "Перераспределение бюджета8",
         description: 'Сайт',
         image: '/images/portfolio/pr-image-8.jpg'
     },
     {
         id: 9,
-        title: "Перераспределение бюджета",
+        title: "Перераспределение бюджета9",
         description: 'Сайт',
         image: '/images/portfolio/pr-image-1.jpg'
     }

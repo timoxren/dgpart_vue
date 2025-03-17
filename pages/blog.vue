@@ -6,18 +6,21 @@
             <div class="row">
                 <!-- Post Content -->
                 <div id="post-container" class="col-md-8" role="main">
-                    <div class="post-container">
+
+                  <!--Start of v-for for Post Items -->
+
+                  <div v-for="item in blogItems" key="item.id" class="post-container">
                         <article class="post">
                             <div class="post-thumbnail">
-                                <a href="#"><img src="/images/blog-post/blog-post-2.jpg"></a>
+                                <a href="#"><img src={{item.Thumbnail}}></a>
                             </div><!-- /.post-thumbnail -->
                             <div class="post-content">
                                 <h2 class="post-title">
-                                    <a href="single-page.html">Универсальный шаблон HTML5</a>
+                                    <a href="single-page.html">{{item.Title}}</a>
                                 </h2>
                                 <div class="entry">
                                     <p>
-                                        Перераспределение бюджета, на первый взгляд, притягивает SWOT-анализ. Маркетинг недостаточно отражает типичный социальный статус, повышая конкуренцию. Отсюда естественно следует, что узнаваемость марки специфицирует маркетинг.
+                                        {{item.Description}}
                                     </p>
                                 </div><!-- /.entry -->
                                 <footer class="post-meta">
@@ -27,177 +30,43 @@
                                     <div class="entry-meta pull-right">
 										<span class="entry-date">
 											<i class="fa fa-clock-o"></i>
-											Май 11
+											{{item.Date}}
 										</span>
                                         <span class="author">
 											<a href="#" rel="author">
 												<i class="fa fa-user"></i>
-												Темы
+												{{item.Author}}
 											</a>
 										</span>
                                         <span class="comments-link">
 											<a href="#" >
 												<i class="fa fa-comment-o"></i>
-												32
+												{{item.CommentsNum}}
 											</a>
 										</span>
                                         <span class="tag-links">
 											<i class="fa fa-tag"></i>
-											<a href="#" rel="tag">HTML5</a>
-											<a href="#" rel="tag">Шаблон</a>
+											<a v-for="tag in item.TagLinks, index" key="index" href="#" rel="tag">{{tag}}</a>
 										</span>
                                     </div><!-- /.entry-meta -->
                                 </footer><!-- /.post-meta -->
                             </div><!-- /.post-content -->
                         </article><!-- /.post -->
 
-                        <article class="post">
-                            <div class="post-thumbnail">
-                                <a href="#"><img src="/images/blog-post/blog-post-3.jpg"></a>
-                            </div><!-- /.post-thumbnail -->
-                            <div class="post-content">
-                                <h2 class="post-title">
-                                    <a href="single-page.html">Конвертируемый шаблон HTML5</a>
-                                </h2>
-                                <div class="entry">
-                                    <p>
-                                        Перераспределение бюджета, согласно Ф.Котлеру, притягивает конкурент. Контент программирует тактический мониторинг активности, осознав маркетинг как часть производства.
-                                    </p>
-                                </div><!-- /.entry -->
-
-                                <footer class="post-meta">
-                                    <div class="continue-reading pull-left">
-                                        <a href="single-page.html">Читать дальше ...</a>
-                                    </div><!-- /.continue-reading -->
-                                    <div class="entry-meta pull-right">
-										<span class="entry-date">
-											<i class="fa fa-clock-o"></i>
-											Май 11
-										</span>
-                                        <span class="author">
-											<a href="#" rel="author">
-												<i class="fa fa-user"></i>
-												Темы
-											</a>
-										</span>
-                                        <span class="comments-link">
-											<a href="#" >
-												<i class="fa fa-comment-o"></i>
-												32
-											</a>
-										</span>
-                                        <span class="tag-links">
-											<i class="fa fa-tag"></i>
-											<a href="#" rel="tag">HTML</a>
-											<a href="#" rel="tag">Темы</a>
-											<a href="#" rel="tag">Шаблон</a>
-										</span>
-                                    </div><!-- /.entry-meta -->
-                                </footer><!-- /.post-meta -->
-                            </div><!-- /.post-content -->
-                        </article><!-- /.post -->
-
-
-                        <article class="post">
-                            <div class="post-thumbnail">
-                                <div class="video-container">
-                                    <iframe src="https://player.vimeo.com/video/149129821" width="620" height="360" allowfullscreen></iframe>
-                                </div><!-- /.video-container -->
-                            </div><!-- /.post-thumbnail -->
-                            <div class="post-content">
-                                <h2 class="post-title">
-                                    <a href="single-page.html">Лидерство в продажах последовательно усиливает конвергентный рейтинг, невзирая на действия конкурентов.</a>
-                                </h2>
-                                <div class="entry">
-                                    <p>
-                                        Перераспределение бюджета, согласно Ф.Котлеру, притягивает конкурент. Контент программирует тактический мониторинг активности, осознав маркетинг как часть производства.
-                                    </p>
-                                </div><!-- /.entry -->
-
-                                <footer class="post-meta">
-                                    <div class="continue-reading pull-left">
-                                        <a href="single-page.html">Читать дальше ...</a>
-                                    </div><!-- /.continue-reading -->
-                                    <div class="entry-meta pull-right">
-										<span class="entry-date">
-											<i class="fa fa-clock-o"></i>
-											Май 10
-										</span>
-                                        <span class="author">
-											<a href="#" rel="author">
-												<i class="fa fa-user"></i>
-												Иван Дионтьев
-											</a>
-										</span>
-                                        <span class="comments-link">
-											<a href="#" >
-												<i class="fa fa-comment-o"></i>
-												32
-											</a>
-										</span>
-                                        <span class="tag-links">
-											<i class="fa fa-tag"></i>
-											<a href="#" rel="tag">Мониторинг </a>
-											<a href="#" rel="tag">Маркетинг </a>
-											<a href="#" rel="tag">Лидерство </a>
-										</span>
-                                    </div><!-- /.entry-meta -->
-                                </footer><!-- /.post-meta -->
-                            </div><!-- /.post-content -->
-                        </article><!-- /.post -->
-
-                        <article class="post">
-                            <div class="post-content">
-                                <h2 class="post-title">
-                                    <a href="single-page.html">Многофункциональный шаблон HTML5</a>
-                                </h2>
-                                <div class="entry">
-                                    <p>
-                                        Мониторинг активности позитивно упорядочивает BTL, осознавая социальную ответственность бизнеса. Стиль менеджмента однородно тормозит эмпирический традиционный канал. Производство не критично..
-                                    </p>
-                                </div><!-- /.entry -->
-                                <footer class="post-meta">
-                                    <div class="continue-reading pull-left">
-                                        <a href="single-page.html">Читать дальше ...</a>
-                                    </div><!-- /.continue-reading -->
-                                    <div class="entry-meta pull-right">
-										<span class="entry-date">
-											<i class="fa fa-clock-o"></i>
-											Май 08
-										</span>
-                                        <span class="author">
-											<a href="#" rel="author">
-												<i class="fa fa-user"></i>
-												Темы
-											</a>
-										</span>
-                                        <span class="comments-link">
-											<a href="#" >
-												<i class="fa fa-comment-o"></i>
-												49
-											</a>
-										</span>
-                                        <span class="tag-links">
-											<i class="fa fa-tag"></i>
-											<a href="#" rel="tag">Шаблон</a>
-											<a href="#" rel="tag">Темы</a>
-										</span>
-                                    </div><!-- /.entry-meta -->
-                                </footer><!-- /.post-meta -->
-                            </div><!-- /.post-content -->
-                        </article><!-- /.post -->
-
-                        <nav class="paging-navigation" role="navigation">
-                            <a class="prev page-numbers pull-left" href="#"><i class="fa fa-chevron-left"></i></a>
-                            <a class="page-numbers" href="#">1</a>
-                            <a class="page-numbers active" href="#">2</a>
-                            <a class="page-numbers" href="#">3</a>
-                            <a class="page-numbers" href="#">4</a>
-                            <a class="page-numbers" href="#">5</a>
-                            <a class="next page-numbers pull-right" href="#"><i class="fa fa-chevron-right"></i></a>
-                        </nav><!-- /.paging-navigation -->
+                     <!--end of v-for -->
 
                     </div><!-- /.post-container -->
+
+                  <nav class="paging-navigation" role="navigation">
+                    <a class="prev page-numbers pull-left" href="#"><i class="fa fa-chevron-left"></i></a>
+                    <a class="page-numbers" href="#">1</a>
+                    <a class="page-numbers active" href="#">2</a>
+                    <a class="page-numbers" href="#">3</a>
+                    <a class="page-numbers" href="#">4</a>
+                    <a class="page-numbers" href="#">5</a>
+                    <a class="next page-numbers pull-right" href="#"><i class="fa fa-chevron-right"></i></a>
+                  </nav><!-- /.paging-navigation -->
+
                 </div><!-- /.col-md-8 -->
                 <!-- Post Content End -->
 
@@ -457,7 +326,66 @@
         </div><!-- /.container -->
     </div><!-- /#blog-page -->
 </template>
+
+
+
+
 <script setup lang="ts">
+
+interface BlogItem {
+  Id: number,
+  Title: string,
+  Description: string,
+  Thumbnail: string,
+  Date: string,
+  Author: string,
+  CommentsNum: number,
+  TagLinks: string[]
+}
+
+
+const blogItems: BlogItem[] = [
+  {
+    Id: 1,
+    Title: "Проблема очковых медведей в геополитике Гватемалы",
+    Description: "Перераспределение бюджета, на первый взгляд, притягивает SWOT-анализ. Маркетинг недостаточно отражает типичный социальный статус, повышая конкуренцию. Отсюда естественно следует, что узнаваемость марки специфицирует маркетинг.",
+    Thumbnail: "/images/blog-post/blog-post-2.jpg",
+    Date: "Май 22",
+    Author: "Артём Дзюба",
+    CommentsNum: 32,
+    TagLinks: ["Футбол", "Дрочка"]
+  },
+  {
+    Id: 2,
+    Title: "Универсальный еблан или РосПилМониторинг",
+    Description: "Перераспределение бюджета, на первый взгляд, притягивает SWOT-анализ. Маркетинг недостаточно отражает типичный социальный статус, повышая конкуренцию. Отсюда естественно следует, что узнаваемость марки специфицирует маркетинг.",
+    Thumbnail: "/images/blog-post/blog-post-3.jpg",
+    Date: "Май 28",
+    Author: "Артемий Лебедев",
+    CommentsNum: 2,
+    TagLinks: ["Дизайн", "Волосы"]
+  },
+  {
+    Id: 3,
+    Title: "Как пропатчить KDE под FREE BSD",
+    Description: "Перераспределение бюджета, на первый взгляд, притягивает SWOT-анализ. Маркетинг недостаточно отражает типичный социальный статус, повышая конкуренцию. Отсюда естественно следует, что узнаваемость марки специфицирует маркетинг.",
+    Thumbnail: "/images/blog-post/blog-post-2.jpg",
+    Date: "Июнь 16",
+    Author: "Хуй Сгоры",
+    CommentsNum: 4,
+    TagLinks: ["Хуи", "Горы"]
+  },
+  {
+    Id: 4,
+    Title: "Smells Like Teen Spirit",
+    Description: "Перераспределение бюджета, на первый взгляд, притягивает SWOT-анализ. Маркетинг недостаточно отражает типичный социальный статус, повышая конкуренцию. Отсюда естественно следует, что узнаваемость марки специфицирует маркетинг.",
+    Thumbnail: "/images/blog-post/blog-post-3.jpg",
+    Date: "Июль 19",
+    Author: "Курт Кобейн",
+    CommentsNum: 27,
+    TagLinks: ["Панк", "Рок"]
+  },
+]
 
 definePageMeta({
     layout: 'pages' // Указываем кастомный макет

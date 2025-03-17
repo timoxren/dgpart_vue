@@ -1,15 +1,19 @@
 <template>
-    <!-- Page Top	 -->
-    <div id="page-top"></div>
-    <!-- Page Top End -->
-    <menu-section></menu-section>
-    <slot/>
-    <Footer></Footer>
-    <div id="scroll-to-top">
+
+
+  <!-- Page Top	 -->
+  <div id="page-top"></div>
+  <!-- Page Top End -->
+  <menu-section></menu-section>
+  <slot/>
+  <Footer></Footer>
+  <div id="scroll-to-top">
 		<span>
 			<i class="fa fa-chevron-up"></i>
 		</span>
-    </div>
+  </div>
+
+
 </template>
 
 <script>
@@ -32,7 +36,7 @@ import Breadcrumbs from "~/components/breadcrumbs.vue";
 import Footer from "~/components/footer.vue";
 
 export default defineComponent({
-    components: {Breadcrumbs, Footer}
+  components: {Breadcrumbs, Footer}
 })
 
 
