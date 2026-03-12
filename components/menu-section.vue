@@ -18,10 +18,14 @@
         <nav class="collapse navbar-collapse" role="navigation">
           <!-- Main navigation -->
           <ul id="headernavigation" class="nav navbar-nav pull-right">
-            <li v-for="menuItem in menuItems">
+            <li v-for="menuItem in menuItems" :key="menuItem.title">
                 <NuxtLink :to="menuItem.link">{{ menuItem.title }}</NuxtLink>
                 <ul v-if="menuItem.subItems" class="sub-menu">
-                    <li v-for="subMenuItem in menuItem.subItems"><NuxtLink :to="subMenuItem.link">{{subMenuItem.title}}</NuxtLink></li>
+                    <li v-for="subMenuItem in menuItem.subItems" :key="subMenuItem.title">
+                        <a href="#" @click.prevent="handlePortfolioClick(subMenuItem.viewType)">
+                            {{ subMenuItem.title }}
+                        </a>
+                    </li>
                 </ul><!-- /.sub-menu -->
             </li>
           </ul><!-- /.sub-menu -->
@@ -32,10 +36,15 @@
   <!-- Menu End -->
 </template>
 <script setup lang="ts">
-
 import { ref, onMounted, onUnmounted } from "vue";
+import { useCvStore, ViewType } from '~/stores/cv';
+import { useRouter } from 'vue-router';
+
+const cvStore = useCvStore();
+const router = useRouter();
 
 const isFixed = ref(false);
+
 const menuItems = [
     {
         "title": "Главная",
@@ -54,30 +63,23 @@ const menuItems = [
         "link": '/portfolio',
         "subItems": [
             {
-                'title': 'Список',
-                'link': '/portfolio'
+                'title': 'Портфолио',
+                "link": '/portfolio/grid',
+                'viewType': ViewType.GRID
             },
             {
-                'title': 'Подробнее',
-                'link': '/portfolio-details'
+                'title': 'Timeline',
+                "link": '/portfolio/timeline',
+                'viewType': ViewType.TIMELINE
             }
         ]
     },
-    {
-        "title": "Блог",
-        "link": '/blog',
-        "subItems": [
-            {
-                'title': 'Список',
-                'link': '/blog'
-            },
-            {
-                'title': 'Подробнее',
-                'link': '/blog-details'
-            }
-        ]
-    }
-]
+];
+
+const handlePortfolioClick = async (viewType: ViewType) => {
+    cvStore.setViewType(viewType);
+    await router.push('/portfolio');
+};
 
 const handleScroll = () => {
   isFixed.value = window.scrollY > 100;

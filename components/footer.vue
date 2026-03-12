@@ -20,7 +20,7 @@
 
     <div class="copyrights">
       <div class="container">
-        Timofei Rysev @ 2025
+        Timofei Rysev @ 2026
       </div><!-- /.container -->
     </div><!-- /.copyrights -->
   </footer><!-- /#footer-section -->

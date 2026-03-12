@@ -2,14 +2,14 @@ version: '3.9'
 
 services:
   app:
-    image: node:23 # Используется Node.js v23
+    image: node:23
     container_name: dgpart_www_app
     ports:
-      - "9800:3000" # Пробрасываем порт для Nuxt
+      - "9800:3000"
     volumes:
-      - .:/usr/src/app # Монтируем текущую директорию
-      - /usr/src/app/node_modules # Исключаем node_modules из монтирования
-    working_dir: /usr/src/app # Устанавливаем рабочую директорию
-    command: sh -c "npm install && npm run dev" # Установка зависимостей и запуск Nuxt
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    working_dir: /usr/src/app
+    command: sh -c "npm install && npm run dev"
     environment:
-      NODE_ENV: development # Переменная окружения для разработки
+      NODE_ENV: development
