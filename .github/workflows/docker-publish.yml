@@ -9,7 +9,7 @@ env:
   REGISTRY: ghcr.io
   # Имя образа. github.repository автоматически подставит "ВАШ_НИК/ИМЯ_РЕПОЗИТОРИЯ"
   # в нижнем регистре, что является требованием для имен Docker-образов.
-  IMAGE_NAME: ${{ lower(github.repository) }}
+  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
   build-and-push:
