@@ -1,0 +1,46 @@
+name: Docker Build and Publish
+
+on:
+  push:
+    branches: [ "master" ]
+
+env:
+  # Адрес реестра контейнеров GitHub
+  REGISTRY: ghcr.io
+  # Имя образа. github.repository автоматически подставит "ВАШ_НИК/ИМЯ_РЕПОЗИТОРИЯ"
+  # в нижнем регистре, что является требованием для имен Docker-образов.
+  IMAGE_NAME: ${{ lower(github.repository) }}
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+
+    # Шаги, которые будут выполнены последовательно
+    steps:
+      # Шаг 1: Клонирование вашего репозитория на виртуальную машину
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Шаг 2: Вход в GitHub Container Registry
+      # Используется официальный action от Docker для безопасного логина.
+      - name: Log in to the Container registry
+        uses: docker/login-action@v4
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # Шаг 3: Сборка и публикация Docker-образа
+      # Этот action использует ваш Dockerfile для сборки и отправки образа в реестр.
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
