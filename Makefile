@@ -29,7 +29,7 @@ build:
 up-prod:
 	docker run -d \
 	  -p 9800:80 \
-	  -v $(CURDIR)/static:/usr/share/nginx/html/static \
+	  -v $(CURDIR)/public:/usr/share/nginx/html/static \
 	  --name timoxren-prod \
 	  $(DOCKER_REPO):latest
 

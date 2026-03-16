@@ -9,7 +9,7 @@ env:
   REGISTRY: ghcr.io
   # Имя образа. github.repository автоматически подставит "ВАШ_НИК/ИМЯ_РЕПОЗИТОРИЯ"
   # в нижнем регистре, что является требованием для имен Docker-образов.
-  IMAGE_NAME: timoxren/dgpart_vue
+  IMAGE_NAME: timoxren/timoxren-app
 
 jobs:
   build-and-push:
