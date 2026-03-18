@@ -2,14 +2,11 @@ name: Docker Build and Publish
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master" ] # <--- ИЗМЕНЕНО НА master
 
 env:
-  # Адрес реестра контейнеров GitHub
   REGISTRY: ghcr.io
-  # Имя образа. github.repository автоматически подставит "ВАШ_НИК/ИМЯ_РЕПОЗИТОРИЯ"
-  # в нижнем регистре, что является требованием для имен Docker-образов.
-  IMAGE_NAME: timoxren/timoxren-app
+  # IMAGE_NAME будет установлен в шаге ниже, чтобы гарантировать нижний регистр
 
 jobs:
   build-and-push:
@@ -19,23 +16,20 @@ jobs:
       contents: read
       packages: write
 
-    # Шаги, которые будут выполнены последовательно
     steps:
-      # Шаг 1: Клонирование вашего репозитория на виртуальную машину
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Шаг 2: Вход в GitHub Container Registry
-      # Используется официальный action от Docker для безопасного логина.
+      - name: Set image name to lowercase
+        run: echo "IMAGE_NAME=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+
       - name: Log in to the Container registry
-        uses: docker/login-action@v4
+        uses: docker/login-action@v3 # Используйте v3 для более новых версий
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      # Шаг 3: Сборка и публикация Docker-образа
-      # Этот action использует ваш Dockerfile для сборки и отправки образа в реестр.
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
@@ -44,3 +38,42 @@ jobs:
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+
+  deploy:
+    needs: build-and-push # Это задание будет выполняться только после успешной сборки и публикации образа
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: read # Необходимо для скачивания образа из GHCR
+
+    steps:
+      - name: Deploy to Server via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            CONTAINER_NAME="dgpart_vue"
+            DOCKER_PORT_MAPPING="9800:80"
+            WEB_ROOT_CONTAINER_PUBLIC="/app/public"
+
+            # IMAGE_NAME уже доступен из предыдущего шага благодаря $GITHUB_ENV
+            # REGISTRY также доступен как переменная окружения
+            DOCKER_REPO_FULL="${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}"
+
+            echo "Deploying image: ${DOCKER_REPO_FULL}:latest"
+
+            docker pull ${DOCKER_REPO_FULL}:latest
+            docker stop ${CONTAINER_NAME} || true
+            docker rm ${CONTAINER_NAME} || true
+
+            docker run -d \
+              -p ${DOCKER_PORT_MAPPING} \
+              -v "${{ secrets.STATIC_DIR_HOST }}:${WEB_ROOT_CONTAINER_PUBLIC}" \
+              --name ${CONTAINER_NAME} \
+              ${DOCKER_REPO_FULL}:latest
+
+            echo "Deployment successful!"
