@@ -2,10 +2,10 @@ DOCKER_REPO ?= timoxren/timoxren-app
 VERSION_FILE = VERSION
 
 # --- Server Configuration ---
-SERVER_USER ?= timoxren
+SERVER_USER ?= dgpart_vue
 SERVER_IP ?= dgpart.ru
-STATIC_DIR_REMOTE ?= /home/timoxren/srv/static/
-DEPLOY_SCRIPT_PATH_REMOTE ?= /home/timoxren/srv/deploy.sh
+STATIC_DIR_REMOTE ?= /home/dgpart_vue/srv/public/
+DEPLOY_SCRIPT_PATH_REMOTE ?= /home/dgpart_vue/srv/deploy.sh
 
 # --- Development Commands ---
 up:
@@ -47,7 +47,7 @@ push-docker:
 sync-static:
 	@echo "--- Syncing static files ---"
 	rsync -avz --delete ./public/ ${SERVER_USER}@${SERVER_IP}:${STATIC_DIR_REMOTE}
-	@echo "--- Syncing deploy script ---"
-	rsync -avz ./deploy.sh ${SERVER_USER}@${SERVER_IP}:${DEPLOY_SCRIPT_PATH_REMOTE}
-	@echo "Sync complete."
+	@#echo "--- Syncing deploy script ---"
+	#rsync -avz ./deploy.sh ${SERVER_USER}@${SERVER_IP}:${DEPLOY_SCRIPT_PATH_REMOTE}
+	@#echo "Sync complete."
 
