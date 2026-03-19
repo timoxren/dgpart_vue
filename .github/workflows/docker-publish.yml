@@ -58,19 +58,20 @@ jobs:
             IMAGE_NAME_FROM_BUILD="${{ needs.build-and-push.outputs.image_name }}"
             
             CONTAINER_NAME="dgpart_vue"
-            DOCKER_PORT_MAPPING="9700:80"
-            WEB_ROOT_CONTAINER_PUBLIC="/app/public"
+            DOCKER_PORT_MAPPING="9800:80"
+            WEB_ROOT_CONTAINER_PUBLIC="/usr/share/nginx/html/public"
+            STATIC_DIR_HOST="/home/dgpart_vue/srv/public"
             DOCKER_REPO_FULL="${{ env.REGISTRY }}/${IMAGE_NAME_FROM_BUILD}"
 
             echo "Deploying image: ${DOCKER_REPO_FULL}:latest"
 
             docker pull ${DOCKER_REPO_FULL}:latest
-            docker stop ${CONTAINER_NAME} || true
-            docker rm ${CONTAINER_NAME} || true
+            docker stop ${CONTAINER_NAME} > /dev/null 2>&1 || true
+            docker rm ${CONTAINER_NAME} > /dev/null 2>&1 || true
 
             docker run -d \
               -p ${DOCKER_PORT_MAPPING} \
-              -v "${{ secrets.STATIC_DIR_HOST }}:${WEB_ROOT_CONTAINER_PUBLIC}" \
+              -v "${STATIC_DIR_HOST}:${WEB_ROOT_CONTAINER_PUBLIC}" \
               --name ${CONTAINER_NAME} \
               ${DOCKER_REPO_FULL}:latest
 
