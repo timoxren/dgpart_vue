@@ -15,7 +15,6 @@ jobs:
       contents: read
       packages: write
 
-    # --- ШАГ 1: Объявляем, что у этого задания будут выходные данные ---
     outputs:
       image_name: ${{ steps.set_name.outputs.image_name }}
 
@@ -23,9 +22,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # --- ШАГ 2: Добавляем 'id' к шагу и используем $GITHUB_OUTPUT ---
       - name: Set image name to lowercase
-        id: set_name # Даем шагу уникальный ID
+        id: set_name
         run: echo "image_name=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
 
       - name: Log in to the Container registry
@@ -41,12 +39,11 @@ jobs:
           context: .
           push: true
           tags: |
-            # Используем выходные данные шага 'set_name'
             ${{ env.REGISTRY }}/${{ steps.set_name.outputs.image_name }}:latest
             ${{ env.REGISTRY }}/${{ steps.set_name.outputs.image_name }}:${{ github.sha }}
 
   deploy:
-    needs: build-and-push # Зависимость от предыдущего задания
+    needs: build-and-push
     runs-on: ubuntu-latest
 
     steps:
@@ -58,8 +55,6 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            # --- ШАГ 3: Используем 'needs' для получения выходных данных ---
-            # Получаем имя образа из outputs предыдущего задания
             IMAGE_NAME_FROM_BUILD="${{ needs.build-and-push.outputs.image_name }}"
             
             CONTAINER_NAME="dgpart_vue"
