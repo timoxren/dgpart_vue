@@ -2,29 +2,34 @@ name: Docker Build and Publish
 
 on:
   push:
-    branches: [ "master" ] # <--- ИЗМЕНЕНО НА master
+    branches: [ "master" ]
 
 env:
   REGISTRY: ghcr.io
-  # IMAGE_NAME будет установлен в шаге ниже, чтобы гарантировать нижний регистр
+  # Имя репозитория будет установлено в шаге ниже
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
-
     permissions:
       contents: read
       packages: write
+
+    # --- ШАГ 1: Объявляем, что у этого задания будут выходные данные ---
+    outputs:
+      image_name: ${{ steps.set_name.outputs.image_name }}
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # --- ШАГ 2: Добавляем 'id' к шагу и используем $GITHUB_OUTPUT ---
       - name: Set image name to lowercase
-        run: echo "IMAGE_NAME=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+        id: set_name # Даем шагу уникальный ID
+        run: echo "image_name=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
 
       - name: Log in to the Container registry
-        uses: docker/login-action@v3 # Используйте v3 для более новых версий
+        uses: docker/login-action@v3
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
@@ -36,16 +41,13 @@ jobs:
           context: .
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+            # Используем выходные данные шага 'set_name'
+            ${{ env.REGISTRY }}/${{ steps.set_name.outputs.image_name }}:latest
+            ${{ env.REGISTRY }}/${{ steps.set_name.outputs.image_name }}:${{ github.sha }}
 
   deploy:
-    needs: build-and-push # Это задание будет выполняться только после успешной сборки и публикации образа
+    needs: build-and-push # Зависимость от предыдущего задания
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: read
-      packages: read # Необходимо для скачивания образа из GHCR
 
     steps:
       - name: Deploy to Server via SSH
@@ -56,13 +58,14 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
+            # --- ШАГ 3: Используем 'needs' для получения выходных данных ---
+            # Получаем имя образа из outputs предыдущего задания
+            IMAGE_NAME_FROM_BUILD="${{ needs.build-and-push.outputs.image_name }}"
+            
             CONTAINER_NAME="dgpart_vue"
-            DOCKER_PORT_MAPPING="9800:80"
+            DOCKER_PORT_MAPPING="9700:80"
             WEB_ROOT_CONTAINER_PUBLIC="/app/public"
-
-            # IMAGE_NAME уже доступен из предыдущего шага благодаря $GITHUB_ENV
-            # REGISTRY также доступен как переменная окружения
-            DOCKER_REPO_FULL="${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}"
+            DOCKER_REPO_FULL="${{ env.REGISTRY }}/${IMAGE_NAME_FROM_BUILD}"
 
             echo "Deploying image: ${DOCKER_REPO_FULL}:latest"
 
