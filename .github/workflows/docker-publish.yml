@@ -57,10 +57,10 @@ jobs:
           script: |
             IMAGE_NAME_FROM_BUILD="${{ needs.build-and-push.outputs.image_name }}"
             
-            CONTAINER_NAME="dgpart_vue"
+            CONTAINER_NAME="timoxren-prod"
             DOCKER_PORT_MAPPING="9800:80"
-            WEB_ROOT_CONTAINER_PUBLIC="/usr/share/nginx/html/public"
-            STATIC_DIR_HOST="/home/dgpart_vue/srv/public"
+            WELL_KNOWN_WEB_ROOT_CONTAINER_PUBLIC="/usr/share/nginx/html/public/.well-known/"
+            WELL_KNOWN_STATIC_DIR_HOST="/home/dgpart_vue/srv/public/.well-known/"
             DOCKER_REPO_FULL="${{ env.REGISTRY }}/${IMAGE_NAME_FROM_BUILD}"
 
             echo "Deploying image: ${DOCKER_REPO_FULL}:latest"
@@ -71,7 +71,7 @@ jobs:
 
             docker run -d \
               -p ${DOCKER_PORT_MAPPING} \
-              -v "${STATIC_DIR_HOST}:${WEB_ROOT_CONTAINER_PUBLIC}" \
+              -v "${WELL_KNOWN_STATIC_DIR_HOST}:${WELL_KNOWN_WEB_ROOT_CONTAINER_PUBLIC}" \
               --name ${CONTAINER_NAME} \
               ${DOCKER_REPO_FULL}:latest
 
