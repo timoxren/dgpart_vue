@@ -9,7 +9,7 @@ DEPLOY_SCRIPT_PATH_REMOTE ?= /home/dgpart_vue/srv/deploy.sh
 
 # --- Development Commands ---
 up:
-	docker compose up -d app app_static
+	docker compose up -d
 
 down:
 	docker compose down
@@ -29,7 +29,6 @@ build:
 up-prod:
 	docker run -d \
 	  -p 9800:80 \
-	  -v $(CURDIR)/public:/usr/share/nginx/html/static \
 	  --name timoxren-prod \
 	  $(DOCKER_REPO):latest
 
