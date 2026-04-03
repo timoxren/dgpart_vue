@@ -202,6 +202,7 @@ export const useCvStore = defineStore('cv', {
                 position: "Разработчик, программист",
                 position_ar: [Position.DEVELOPER],
                 description: "Работа с популярными CMS (Joomla, Wordpress, Bitrix, MODX и др.).",
+                system_modules: "Самописные CMS.",
                 duties: [
                     "Работа с заказчиками",
                     "Написание технической документации",

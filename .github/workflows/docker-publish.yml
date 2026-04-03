@@ -59,7 +59,7 @@ jobs:
             
             CONTAINER_NAME="timoxren-prod"
             DOCKER_PORT_MAPPING="9800:80"
-            WELL_KNOWN_WEB_ROOT_CONTAINER_PUBLIC="/usr/share/nginx/html/public/.well-known/"
+            WELL_KNOWN_WEB_ROOT_CONTAINER_PUBLIC="/app/public/.well-known/"
             WELL_KNOWN_STATIC_DIR_HOST="/home/dgpart_vue/srv/public/.well-known/"
             DOCKER_REPO_FULL="${{ env.REGISTRY }}/${IMAGE_NAME_FROM_BUILD}"
 

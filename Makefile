@@ -28,7 +28,7 @@ build:
 # Runs the production container locally for testing
 up-prod:
 	docker run -d \
-	  -p 9800:80 \
+	  -p 9800:3000 \
 	  --name timoxren-prod \
 	  $(DOCKER_REPO):latest
 
