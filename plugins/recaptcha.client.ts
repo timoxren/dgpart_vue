@@ -3,7 +3,7 @@ import { VueReCaptcha } from 'vue-recaptcha-v3'
 
 export default defineNuxtPlugin((nuxtApp) => {
     const config = useRuntimeConfig()
-    const siteKey = '6Lcf-qQsAAAAAA5EU8She4Y3eW0OtM-8oCm8nGCG'
+    const siteKey = config.public.recaptchaSiteKey
 
     if (!siteKey) {
         console.error('ReCaptcha error: Site Key is missing!')

@@ -1,5 +1,5 @@
 <template>
-    <breadcrumbs name="Ну-с начнем"></breadcrumbs>
+    <breadcrumbs name="Ну-с начнем" :pages="[]"></breadcrumbs>
     <!--  <top-section></top-section>-->
     <about-us-section></about-us-section>
     <!--  <video-section></video-section>-->

@@ -2,6 +2,7 @@ import { Resend } from 'resend';
 import { defineEventHandler, readBody, createError } from 'h3';
 
 export default defineEventHandler(async (event) => {
+    const config = useRuntimeConfig();
     const body = await readBody(event);
     // Извлекаем recaptchaToken из тела запроса
     const { name, email, subject, message, recaptchaToken } = body;
@@ -20,7 +21,7 @@ export default defineEventHandler(async (event) => {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: new URLSearchParams({
-                secret: '6Lcf-qQsAAAAAGq5wXicPOFI29ykOXBuOshrEv3U',
+                secret: config.recaptchaSecretKey,
                 response: recaptchaToken,
             }),
         });
@@ -44,7 +45,7 @@ export default defineEventHandler(async (event) => {
     }
 
     // 3. Отправка письма через Resend (выполняется только если капча пройдена)
-    const resend = new Resend('re_FYaX2bdF_DX1wrQQysPFAxLGJMs8rvdFP');
+    const resend = new Resend(config.resendApiKey);
 
     try {
         const { data, error } = await resend.emails.send({

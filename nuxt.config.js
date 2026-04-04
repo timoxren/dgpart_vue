@@ -8,6 +8,13 @@ export default defineNuxtConfig({
     modules: [
         '@pinia/nuxt',
     ],
+    runtimeConfig: {
+        resendApiKey: process.env.RESEND_API_KEY,
+        recaptchaSecretKey: process.env.NUXT_RECAPTCHA_SECRET_KEY,
+        public: {
+            recaptchaSiteKey: process.env.NUXT_PUBLIC_RECAPTCHA_SITE_KEY,
+        },
+    },
     vite: {
         server: {
             watch: {

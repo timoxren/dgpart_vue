@@ -5,7 +5,7 @@
       <div class="container">
         <div class="navbar-header">
           <!-- Responsive Navigation -->
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <button type="button" class="navbar-toggle" @click="toggleMenu">
             <span class="sr-only">Меню</span>
             <i class="fa fa-bars"></i>
           </button> <!-- /.navbar-toggle -->
@@ -15,11 +15,11 @@
           </a><!-- /.navbar-brand -->
         </div> <!-- /.navbar-header -->
 
-        <nav class="collapse navbar-collapse" role="navigation">
+        <nav class="navbar-collapse" :class="{'collapse': !isMenuOpen}" role="navigation">
           <!-- Main navigation -->
           <ul id="headernavigation" class="nav navbar-nav pull-right">
             <li v-for="menuItem in menuItems" :key="menuItem.title">
-                <NuxtLink :to="menuItem.link">{{ menuItem.title }}</NuxtLink>
+                <NuxtLink :to="menuItem.link" @click="closeMenu">{{ menuItem.title }}</NuxtLink>
                 <ul v-if="menuItem.subItems" class="sub-menu">
                     <li v-for="subMenuItem in menuItem.subItems" :key="subMenuItem.title">
                         <a href="#" @click.prevent="handlePortfolioClick(subMenuItem.viewType)">
@@ -44,6 +44,7 @@ const cvStore = useCvStore();
 const router = useRouter();
 
 const isFixed = ref(false);
+const isMenuOpen = ref(false);
 
 const menuItems = [
     {
@@ -67,7 +68,16 @@ const menuItems = [
 
 const handlePortfolioClick = async (viewType: ViewType) => {
     cvStore.setViewType(viewType);
+    isMenuOpen.value = false; // Close menu on navigation
     await router.push('/portfolio');
+};
+
+const toggleMenu = () => {
+  isMenuOpen.value = !isMenuOpen.value;
+};
+
+const closeMenu = () => {
+  isMenuOpen.value = false;
 };
 
 const handleScroll = () => {
