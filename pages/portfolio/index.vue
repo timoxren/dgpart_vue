@@ -1,6 +1,6 @@
 <template>
 
-    <breadcrumbs name="Подробнее" :pages="[{name: 'Опыт работы', link: '/portfolio'}]"></breadcrumbs>
+    <breadcrumbs name="Опыт работы" :pages="[{name: 'Опыт работы', link: '/portfolio'}]"></breadcrumbs>
 
     <!-- Portfolio Page -->
     <div id="portfolio-page" class="page portfolio-page">

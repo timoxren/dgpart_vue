@@ -16,13 +16,13 @@
 
       <div class="container">
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-3">
             <div class="about-us-thumb">
               <img src="/images/section-content/tim_r.jpg" title="Лучше фотку не нашел (:">
             </div><!-- /.about-us-thumb -->
           </div><!-- /.col-md-6 -->
 
-          <div class="col-md-6">
+          <div class="col-md-9">
               <p>Привет! Меня зовут <strong>Рысьев Тимофей</strong>, и я профессиональный разработчик с более чем <strong>19-летним опытом</strong> в backend-разработке, DevOps и проектировании сложных IT-решений.</p>
 
               <h2>Кто я и чем занимаюсь?</h2>

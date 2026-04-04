@@ -11,7 +11,7 @@
           </button> <!-- /.navbar-toggle -->
           <!-- Logo -->
           <a class="navbar-brand" href="/">
-            <span>DG</span>part
+            <span>МОЁ</span>РЕЗЮМЭ#
           </a><!-- /.navbar-brand -->
         </div> <!-- /.navbar-header -->
 

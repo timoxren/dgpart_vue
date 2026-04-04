@@ -5,12 +5,11 @@
             <div class="pattern">
                 <div class="container">
                     <p class="page-name">
-                        Подробнее
+                        {{ name }}
                     </p><!-- /.page-name -->
                     <p class="page-location">
                         <NuxtLink to="/">Главная</NuxtLink>
                         <NuxtLink v-for="(page, key) in pages" :key="key" :to="page.link">{{ page.name }}</NuxtLink>
-                        {{ name }}
                     </p><!-- /.page-location -->
                 </div><!-- /.container -->
             </div><!-- /.pattern -->
