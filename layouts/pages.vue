@@ -13,21 +13,6 @@
 </template>
 
 <script setup lang="ts">
-import "assets/css/bootstrap.min.css"
-
-import "assets/css/font-awesome.min.css"
-import "assets/css/linecons-font-style.css"
-import "assets/css/jquery.fs.boxer.css"
-// import "assets/css/owl.carousel.css"
-import "assets/css/content_slider_style.css"
-import "assets/css/animate.css"
-import "assets/css/style.css"
-import "assets/css/responsive.css"
-// import "assets/scss/responsive.scss"
-import {defineComponent} from "vue";
-import Breadcrumbs from "~/components/breadcrumbs.vue";
-import Footer from "~/components/footer.vue";
-
 useHead({
   title: 'Рысьев Тимофей - Backend-разработчик, DevOps, Team Lead',
   meta: [
@@ -38,5 +23,23 @@ useHead({
     { property: 'og:type', content: 'website' },
     { property: 'og:url', content: 'https://timoxren.ru' },
   ],
+})
+</script>
+
+<script>
+import "assets/css/bootstrap.min.css"
+import "assets/css/font-awesome.min.css"
+import "assets/css/linecons-font-style.css"
+import "assets/css/jquery.fs.boxer.css"
+import "assets/css/content_slider_style.css"
+import "assets/css/animate.css"
+import "assets/css/style.css"
+import "assets/css/responsive.css"
+import {defineComponent} from "vue";
+import Breadcrumbs from "~/components/breadcrumbs.vue";
+import Footer from "~/components/footer.vue";
+
+export default defineComponent({
+    components: {Breadcrumbs, Footer}
 })
 </script>
