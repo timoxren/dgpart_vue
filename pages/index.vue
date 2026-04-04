@@ -1,5 +1,5 @@
 <template>
-    <breadcrumbs></breadcrumbs>
+    <breadcrumbs name=""></breadcrumbs>
     <!--  <top-section></top-section>-->
     <about-us-section></about-us-section>
     <!--  <video-section></video-section>-->
@@ -69,7 +69,7 @@
 <!--        </div>&lt;!&ndash; /.blog-section &ndash;&gt;-->
 <!--    </section>&lt;!&ndash; #blog &ndash;&gt;-->
     <!-- Our Blogs Section End-->
-    <tweet-section></tweet-section>
+<!--    <tweet-section></tweet-section>-->
     <!--  <subscribe-section></subscribe-section>-->
     <contact-form-section></contact-form-section>
     <!--  <googlemaps-section></googlemaps-section>-->

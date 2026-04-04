@@ -9,7 +9,7 @@
           </h2><!-- /.section-title -->
 
           <div class="section-description">
-            Создаю масштабируемые и надёжные IT-решения, объединяя <b>19 лет опыта</b> в backend-разработке, DevOps и архитектуре микросервисов. Люблю структурировать хаос, автоматизировать процессы и делать технологии проще для людей.
+            Создаю масштабируемые и надёжные IT-решения, объединяя <b>20 лет опыта</b> в backend-разработке, DevOps и архитектуре микросервисов. Люблю структурировать хаос, автоматизировать процессы и делать технологии проще для людей.
           </div><!-- /.section-description -->
         </div><!-- /.sec-head-style -->
       </div><!-- /.sec-head-container -->
@@ -18,7 +18,7 @@
         <div class="row">
           <div class="col-md-6">
             <div class="about-us-thumb">
-              <img src="/images/section-content/tim_r.jpg">
+              <img src="/images/section-content/tim_r.jpg" title="Лучше фотку не нашел (:">
             </div><!-- /.about-us-thumb -->
           </div><!-- /.col-md-6 -->
 

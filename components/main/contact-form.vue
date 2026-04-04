@@ -83,24 +83,23 @@
                             <div class="col-md-3 col-sm-6 contact-info-box wow bounceInDown center animated"
                                  data-wow-delay=".2s">
 
-									<span class="icon map-marker">
+									<span class="icon skype">
 										<i aria-hidden="true" class="li_location"> </i>
 									</span>
                                 <p class="contact-details-title">Адрес</p>
-                                <span class="texts">Москва. Мичуринский проспект <br>
-										119607
-									</span>
+                                <span class="texts">Где угодно</span>
                             </div> <!-- /.contact-info-box -->
 
                             <div class="col-md-3 col-sm-6 contact-info-box wow bounceInDown center animated"
                                  data-wow-delay=".4s">
-									<span class="icon envelope">
-										<i aria-hidden="true" class="li_mail"></i>
-									</span>
+                                <span class="icon envelope">
+                                    <i aria-hidden="true" class="li_mail"></i>
+                                </span>
                                 <p class="contact-details-title">E-mail</p>
-                                <span class="texts"><a href="#">lynxrta@gmail.com</a> <br>
-										<a href="#">info@timoxren.ru</a>
-									</span>
+                                <span class="texts">
+                                    <a href="mailto:lynxrta@gmail.com">lynxrta@gmail.com</a> <br>
+                                    <a href="mailto:info@timoxren.ru">info@timoxren.ru</a>
+                                </span>
                             </div><!--  /.contact-info-box -->
 
                             <div class="col-md-3 col-sm-6 contact-info-box wow bounceInDown center animated"
@@ -109,19 +108,20 @@
 										<i aria-hidden="true" class="li_phone"></i>
 									</span>
                                 <p class="contact-details-title">Телефон</p>
-                                <span class="texts">+7 (926) 694 0759 <br>
-										+995 (599) 40-95-87 <br/>
-                    +66 (81) 667-3196
-									</span>
+                                <span class="texts">
+                                    <a href="tel:+79266940759">+7 (926) 694 0759</a><br/>
+                                    <a href="tel:+995599409587">+995 (599) 40-95-87</a><br/>
+                                    <a href="tel:+66816673196">+66 (81) 667-3196</a><br/>
+                                </span>
                             </div><!-- /.contact-info-box -->
 
                             <div class="col-md-3 col-sm-6 contact-info-box wow bounceInDown center animated"
                                  data-wow-delay=".8s">
-                                <span class="icon skype"><i class="fa fa-telegram"></i></span>
+                                <span class="icon map-marker"><i class="fa fa-telegram"></i></span>
                                 <p class="contact-details-title">Telegram</p>
-                                <span class="texts"><a href="#">lynxrta</a> <br>
-										<a href="#">@Timoxren</a>
-									</span>
+                                <span class="texts">
+                                    <a href="https://t.me/Timoxren">@Timoxren</a>
+                                </span>
                             </div><!-- /.contact-info-box -->
                         </div><!-- /.contact-info -->
                     </div><!-- /.row -->
@@ -134,13 +134,18 @@
     <!-- Contact Section End -->
 </template>
 <script setup lang="ts">
-import { ref, reactive } from 'vue';
+import {ref, reactive} from 'vue';
+import {useReCaptcha} from 'vue-recaptcha-v3'
+
+// Получаем доступ к методам капчи
+const recaptchaInstance = useReCaptcha()
 
 const formData = reactive({
     name: '',
     email: '',
     subject: '',
     message: '',
+    recaptchaToken: '',
 });
 
 const loading = ref(false);
@@ -193,6 +198,18 @@ const submitForm = async () => {
     loading.value = true;
 
     try {
+        await recaptchaInstance?.recaptchaLoaded()
+
+        // 2. Генерируем токен
+        const token = await recaptchaInstance?.executeRecaptcha('submit_form')
+
+        if (!token) {
+            alert('Ошибка инициализации капчи')
+            return
+        }
+
+        formData.recaptchaToken = token;
+
         const response = await $fetch('/api/contact', {
             method: 'POST',
             body: {

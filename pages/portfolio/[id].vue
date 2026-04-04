@@ -1,5 +1,5 @@
 <template>
-    <breadcrumbs :pages="[{name: 'Портфолио', link: '/portfolio'}]"></breadcrumbs>
+    <breadcrumbs name="" :pages="[{name: 'Портфолио', link: '/portfolio'}]"></breadcrumbs>
 
     <div id="portfolio-page" class="page portfolio-page">
         <div class="container">

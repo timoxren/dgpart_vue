@@ -59,20 +59,9 @@ const menuItems = [
         "link": '/#contact'
     },
     {
-        "title": "Портфолио",
+        "title": "Опыт работы",
         "link": '/portfolio',
-        "subItems": [
-            {
-                'title': 'Портфолио',
-                "link": '/portfolio/grid',
-                'viewType': ViewType.GRID
-            },
-            {
-                'title': 'Timeline',
-                "link": '/portfolio/timeline',
-                'viewType': ViewType.TIMELINE
-            }
-        ]
+        'viewType': ViewType.TIMELINE
     },
 ];
 

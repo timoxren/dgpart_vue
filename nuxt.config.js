@@ -7,21 +7,7 @@ export default defineNuxtConfig({
     ssr: true,
     modules: [
         '@pinia/nuxt',
-        'nuxt-recaptcha',
     ],
-    recaptcha: {
-        version: 3,
-    },
-    runtimeConfig: {
-        recaptcha: {
-            secretKey: process.env.NUXT_RECAPTCHA_SECRET_KEY,
-        },
-        public: {
-            recaptcha: {
-                siteKey: process.env.NUXT_PUBLIC_RECAPTCHA_SITE_KEY,
-            },
-        }
-    },
     vite: {
         server: {
             watch: {

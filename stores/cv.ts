@@ -7,7 +7,7 @@ export enum Position {
 }
 
 export enum ViewType {
-    GRID = "grid",
+    LIST = "list",
     TIMELINE = "timeline"
 }
 
@@ -28,7 +28,7 @@ export interface CVItem {
 export const useCvStore = defineStore('cv', {
     state: () => ({
         selectedRole: '',
-        viewType: ViewType.GRID,
+        viewType: ViewType.TIMELINE,
         cvItems: [
             {
                 id: 12,

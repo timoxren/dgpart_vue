@@ -22,8 +22,8 @@ import "assets/css/jquery.fs.boxer.css"
 import "assets/css/content_slider_style.css"
 import "assets/css/animate.css"
 import "assets/css/style.css"
-// import "assets/css/responsive.css"
-import "assets/scss/responsive.scss"
+import "assets/css/responsive.css"
+// import "assets/scss/responsive.scss"
 import {defineComponent} from "vue";
 import Breadcrumbs from "~/components/breadcrumbs.vue";
 import Footer from "~/components/footer.vue";

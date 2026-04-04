@@ -1,6 +1,6 @@
 <template>
 
-    <breadcrumbs name="Подробнее" :pages="[{name: 'Портфолио', link: '/portfolio'}]"></breadcrumbs>
+    <breadcrumbs name="Подробнее" :pages="[{name: 'Опыт работы', link: '/portfolio'}]"></breadcrumbs>
 
     <!-- Portfolio Page -->
     <div id="portfolio-page" class="page portfolio-page">
@@ -8,83 +8,53 @@
             <div id="works-container" class="clearfix">
                 <div class="container">
                     <div class="portfolioFilter">
-                        <a
-                            @click.prevent="setView('timeline')"
-                            :class="cvStore.viewType == ViewType.TIMELINE ? 'current': ''"
-                        >
-                            Timeline
-                        </a>
+                        <div class="portfolioRole">
+                        Моя роль в комманде
+                        </div>
                         <a
                             @click.prevent="setFilter('')"
-                            href="#" data-filter="" :class="(cvStore.getFilter === '' && cvStore.viewType === 'grid') ? 'current' : ''">Смотреть все</a>
+                            href="#" data-filter="" :class="(cvStore.getFilter === '' && cvStore.viewType === 'list') ? 'current' : ''">Смотреть все</a>
                         <a
-                            :class="(cvStore.getFilter === pos && cvStore.viewType === 'grid') ? 'current' : ''"
+                            :class="(cvStore.getFilter === pos && cvStore.viewType === ViewType.LIST) ? 'current' : ''"
                             @click.prevent="setFilter(pos);" v-for="pos in Position" :key="pos" href="#">{{ pos }}</a>
                     </div> <!-- /.worksFilter -->
-                    <div id="works-item-grid" class="works-item row" v-if="cvStore.viewType === ViewType.GRID">
-                        <figure v-for="item in cvStore.getSortedItems" :key="item.start_timestamp"
-                                :class="['item', 'col-lg-3', 'col-md-4', 'col-sm-6', 'col-xs-12', ...item.position_ar]">
-                            <img v-if="item.logo_url" :src="item.logo_url" :title="item.company" :alt="item.company" />
-                            <div class="item" v-if="item.logo_text" :title="item.company" :alt="item.company">
-                                {{ item.logo_text }}
-                            </div>
-                            <figcaption>
-                                <NuxtLink :to="'/portfolio/' + item.id">
-                                    <div class="portfolio-caption">
-                                        <span class="protfolio-title">{{ item.company }}</span>
-                                        <span class="protfolio-cat">{{ item.position }}</span>
-                                    </div>
-                                    <span class="protfolio-icon">
-                                        <i class="fa fa-heart-o"></i>
-                                    </span>
-                                </NuxtLink>
-                            </figcaption>
-                        </figure>
 
-                    </div><!-- /.works-item -->
                     <div class="works-item-timeline" v-if="cvStore.viewType === ViewType.TIMELINE">
-                        <div class="timeline-flex">
-                            <div v-for="[yearMonth, items] in groupedByYearMonth" :key="yearMonth" class="timeline-year-group">
-                                <div class="timeline-year">{{ yearMonth }}</div>
-                                <div class="timeline-items">
-                                    <div v-for="item in items" :key="item.id" class="timeline-item">
-                                        <div class="timeline-badge">
-                                            <i class="fa fa-briefcase"></i>
+                        <div class="timeline-flex timeline-items">
+
+                            <div v-for="item in cvStore.getSortedItems" :key="item.id" class="timeline-item">
+                                <div class="timeline-badge">
+                                    <i class="fa fa-briefcase"></i>
+                                </div>
+                                <NuxtLink style="width:100%" :to="'/portfolio/' + item.id">
+                                    <div class="timeline-panel">
+                                        <div class="timeline-heading">
+                                            <h4 class="timeline-title">{{ item.company }}</h4>
+                                            <div class="timeline-period">
+                                                <i class="fa fa-clock-o"></i> {{ item.period }}
+                                            </div>
                                         </div>
-                                        <div class="timeline-panel">
-                                            <div class="timeline-heading">
-                                                <h4 class="timeline-title">{{ item.company }}</h4>
-                                                <div class="timeline-period">
-                                                    <i class="fa fa-clock-o"></i> {{ item.period }}
-                                                </div>
-                                            </div>
-                                            <div class="timeline-body">
-                                                <p>{{ item.position }}</p>
-                                            </div>
+                                        <img v-if="item.logo_url" :src="item.logo_url" :title="item.company" :alt="item.company" />
+                                        <div class="timeline-body">
+                                            <p>{{ item.description }}</p>
                                         </div>
                                     </div>
-                                </div>
+                                </NuxtLink>
                             </div>
+
                         </div>
                     </div>
                 </div><!-- /.container -->
             </div><!-- /#works-container -->
 
-            <div class="container">
-                <div class="more-works">
-                    <a class="btn" href="portfolio.html">
-                        <span><i class="fa fa-plus"></i></span>
-                    </a>
-                </div><!-- /.load-more -->
-            </div><!-- /.container -->
         </div><!-- /.works-section -->
     </div><!-- #portfolio-page -->
     <!-- Portfolio Page -->
 </template>
 
 <script setup lang="ts">
-import {Position, useCvStore, ViewType, type CVItem} from '~/stores/cv';
-import { computed } from 'vue';
+import {type CVItem, Position, useCvStore, ViewType} from '~/stores/cv';
+import {computed} from 'vue';
 
 const cvStore = useCvStore();
 
@@ -94,7 +64,7 @@ definePageMeta({
 
 function setFilter(role: string)
 {
-    cvStore.setViewType(ViewType.GRID);
+    cvStore.setViewType(ViewType.TIMELINE);
     cvStore.setFilter(role);
 }
 
@@ -103,34 +73,16 @@ function setView(type: ViewType)
     cvStore.setViewType(type);
 }
 
-const groupedByYearMonth = computed(() => {
-    const grouped = [...cvStore.cvItems].reduce((acc, item) => {
-        const date = new Date(item.start_timestamp * 1000);
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0'); // +1 because months are 0-indexed, padStart for '05'
-        const yearMonthKey = `${year}-${month}`;
-
-        if (!acc[yearMonthKey]) {
-            acc[yearMonthKey] = [];
-        }
-        acc[yearMonthKey].push(item);
-        return acc;
-    }, {} as Record<string, CVItem[]>);
-
-    const asArray = Object.entries(grouped);
-    // Sort by year-month key in descending order (e.g., "2023-05", "2023-04")
-    asArray.sort(([keyA], [keyB]) => keyB.localeCompare(keyA));
-
-    for (const [, items] of asArray) {
-        items.sort((a, b) => b.start_timestamp - a.start_timestamp);
-    }
-
-    return asArray;
-});
-
 </script>
 
 <style lang="scss">
+    .portfolioRole {
+        margin-bottom: 20px;
+        font-weight: bold;
+        font-size: 1.2em;
+
+    }
+
     figure {
         height: 10em;
         display: flex;
@@ -166,6 +118,7 @@ const groupedByYearMonth = computed(() => {
         flex-grow: 1;
         border-left: 3px solid #eeeeee;
         padding-left: 20px;
+        margin-left: 20px;
     }
 
     .timeline-item {
@@ -195,6 +148,11 @@ const groupedByYearMonth = computed(() => {
         padding: 20px;
         position: relative;
         box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+
+        img {
+            max-height: 50px;
+            margin: 10px;
+        }
     }
 
     .timeline-heading {
@@ -237,5 +195,15 @@ const groupedByYearMonth = computed(() => {
         border-left: 0 solid #fff;
         border-bottom: 14px solid transparent;
         content: " ";
+    }
+
+    @media (max-width: 430px) {
+        .timeline-heading {
+            display: block;
+        }
+
+        .timeline-period {
+            margin-top: 20px;
+        }
     }
 </style>
