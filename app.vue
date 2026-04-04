@@ -14,6 +14,8 @@ useHead({
     { property: 'og:image', content: 'https://timoxren.ru/images/section-content/tim_r.jpg' },
     { property: 'og:type', content: 'website' },
     { property: 'og:url', content: 'https://timoxren.ru' },
+    { property: 'og:locale', content: 'ru_RU' },
+    { property: 'og:logo', content: 'https://timoxren.ru/images/section-content/tim_r.jpg' },
   ],
 })
 </script>
