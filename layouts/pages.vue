@@ -12,7 +12,7 @@
     </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import "assets/css/bootstrap.min.css"
 
 import "assets/css/font-awesome.min.css"
@@ -28,9 +28,15 @@ import {defineComponent} from "vue";
 import Breadcrumbs from "~/components/breadcrumbs.vue";
 import Footer from "~/components/footer.vue";
 
-export default defineComponent({
-    components: {Breadcrumbs, Footer}
+useHead({
+  title: 'Рысьев Тимофей - Backend-разработчик, DevOps, Team Lead',
+  meta: [
+    { name: 'description', content: 'Создаю масштабируемые и надёжные IT-решения, объединяя 20 лет опыта в backend-разработке, DevOps и архитектуре микросервисов.' },
+    { property: 'og:title', content: 'Рысьев Тимофей - Backend-разработчик, DevOps, Team Lead' },
+    { property: 'og:description', content: 'Создаю масштабируемые и надёжные IT-решения, объединяя 20 лет опыта в backend-разработке, DevOps и архитектуре микросервисов.' },
+    { property: 'og:image', content: 'https://timoxren.ru/images/section-content/tim_r.jpg' },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:url', content: 'https://timoxren.ru' },
+  ],
 })
-
-
 </script>
