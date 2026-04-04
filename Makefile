@@ -4,7 +4,7 @@ VERSION_FILE = VERSION
 # --- Server Configuration ---
 SERVER_USER ?= dgpart_vue
 SERVER_IP ?= dgpart.ru
-STATIC_DIR_REMOTE ?= /home/dgpart_vue/srv/public/
+STATIC_DIR_REMOTE ?= /home/dgpart_vue/srv/
 DEPLOY_SCRIPT_PATH_REMOTE ?= /home/dgpart_vue/srv/deploy.sh
 
 # --- Development Commands ---
@@ -43,9 +43,9 @@ push-docker:
 	@echo "Pushed version $(VERSION) and latest to $(DOCKER_REPO)"
 
 # --- Server Sync ---
-sync-static:
+sync-env:
 	@echo "--- Syncing static files ---"
-	rsync -avz --delete ./public/ ${SERVER_USER}@${SERVER_IP}:${STATIC_DIR_REMOTE}
+	rsync -avz --delete .env ${SERVER_USER}@${SERVER_IP}:${STATIC_DIR_REMOTE}
 	@#echo "--- Syncing deploy script ---"
 	#rsync -avz ./deploy.sh ${SERVER_USER}@${SERVER_IP}:${DEPLOY_SCRIPT_PATH_REMOTE}
 	@#echo "Sync complete."

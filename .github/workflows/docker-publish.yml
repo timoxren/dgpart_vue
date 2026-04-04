@@ -70,6 +70,7 @@ jobs:
             docker rm ${CONTAINER_NAME} > /dev/null 2>&1 || true
 
             docker run -d \
+              --env-file /home/dgpart_vue/srv/.env \
               -p ${DOCKER_PORT_MAPPING} \
               -v "${WELL_KNOWN_STATIC_DIR_HOST}:${WELL_KNOWN_WEB_ROOT_CONTAINER_PUBLIC}" \
               --name ${CONTAINER_NAME} \
