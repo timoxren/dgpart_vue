@@ -1,13 +1,4 @@
 <template>
-    <Head>
-      <title>Рысьев Тимофей - Backend-разработчик, DevOps, Team Lead</title>
-      <meta name="description" content="Создаю масштабируемые и надёжные IT-решения, объединяя 20 лет опыта в backend-разработке, DevOps и архитектуре микросервисов." />
-      <meta property="og:title" content="Рысьев Тимофей - Backend-разработчик, DevOps, Team Lead" />
-      <meta property="og:description" content="Создаю масштабируемые и надёжные IT-решения, объединяя 20 лет опыта в backend-разработке, DevOps и архитектуре микросервисов." />
-      <meta property="og:image" content="https://timoxren.ru/images/section-content/tim_r.jpg" />
-      <meta property="og:type" content="website" />
-      <meta property="og:url" content="https://timoxren.ru" />
-    </Head>
     <!-- Page Top	 -->
     <div id="page-top"></div>
     <!-- Page Top End -->
